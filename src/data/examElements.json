@@ -1,0 +1,119 @@
+[
+  {
+    "symbol": "Cr",
+    "nameTh": "โครเมียม",
+    "atomicNumber": 24,
+    "atomicMass": 52,
+    "modes": ["basic20_plus", "posn"],
+    "tag": "จัดเรียง e- ข้อยกเว้น [Ar] 4s1 3d5",
+    "examTip": "ข้อสอบ สอวน. ชอบถามจำนวน e- เดี่ยวในสถานะพื้น และการเสถียรแบบ Half-filled"
+  },
+  {
+    "symbol": "Cu",
+    "nameTh": "ทองแดง",
+    "atomicNumber": 29,
+    "atomicMass": 63.5,
+    "modes": ["basic20_plus", "posn", "alevel"],
+    "tag": "จัดเรียง e- ข้อยกเว้น [Ar] 4s1 3d10 / เคมีไฟฟ้า",
+    "examTip": "สอวน. ออกเรื่อง e- ครบถ้วน (Fully-filled) ส่วน A-Level ใช้คำนวณเซลล์กัลวานิก/อิเล็กโทรลิติก"
+  },
+  {
+    "symbol": "Xe",
+    "nameTh": "ซีนอน",
+    "atomicNumber": 54,
+    "atomicMass": 131.3,
+    "modes": ["posn"],
+    "tag": "แก๊สมีสกุลเกินกฎออกเตต / VSEPR",
+    "examTip": "ออกสอบ สอวน. เรื่อง VSEPR บ่อยมาก เช่น XeF2 (เส้นตรง) และ XeF4 (สี่เหลี่ยมแบนราบ)"
+  },
+  {
+    "symbol": "S",
+    "nameTh": "ซัลเฟอร์",
+    "atomicNumber": 16,
+    "atomicMass": 32,
+    "modes": ["basic20", "posn", "alevel"],
+    "tag": "แนวโน้ม IE1 < P / SF4, SF6",
+    "examTip": "สอวน. ถามเรื่อง IE1 น้อยกว่า P และ VSEPR ขยายเวเลนซ์ / A-Level ใช้หา MW สารละลายกรด"
+  },
+  {
+    "symbol": "P",
+    "nameTh": "ฟอสฟอรัส",
+    "atomicNumber": 15,
+    "atomicMass": 31,
+    "modes": ["basic20", "posn"],
+    "tag": "โครงสร้างครึ่งเสถียร 3p3 / PCl5",
+    "examTip": "สอวน. ชอบออกเรื่องค่า IE1 สูงกว่า S และสารประกอบพีระมิดคู่ฐานสามเหลี่ยม"
+  },
+  {
+    "symbol": "Cl",
+    "nameTh": "คลอรีน",
+    "atomicNumber": 17,
+    "atomicMass": 35.5,
+    "modes": ["basic20", "posn", "alevel"],
+    "tag": "ClF3 รูปตัวที / MW = 35.5 (NaCl 58.5)",
+    "examTip": "สอวน. ออก VSEPR รูปตัวที / A-Level ใช้คำนวณมวลตะกอน AgCl และเกลือคลอไรด์"
+  },
+  {
+    "symbol": "B",
+    "nameTh": "โบรอน",
+    "atomicNumber": 5,
+    "atomicMass": 11,
+    "modes": ["basic20", "posn"],
+    "tag": "ไม่ครบออกเตต BF3 / ทรงสี่หน้า BF4-",
+    "examTip": "สอวน. ออกเรื่องสารประกอบโคเวเลนต์ที่ไม่ครบ 8"
+  },
+  {
+    "symbol": "C",
+    "nameTh": "คาร์บอน",
+    "atomicNumber": 6,
+    "atomicMass": 12,
+    "modes": ["basic20", "alevel"],
+    "tag": "แกนกลางสารอินทรีย์ / CO2 MW=44",
+    "examTip": "A-Level ออกคำนวณการเผาไหม้ ไฮโดรคาร์บอน และสูตรเอมพิริคัล"
+  },
+  {
+    "symbol": "H",
+    "nameTh": "ไฮโดรเจน",
+    "atomicNumber": 1,
+    "atomicMass": 1,
+    "modes": ["basic20", "alevel"],
+    "tag": "H2O MW=18 / แก๊ส H2 ในปริมาณสารสัมพันธ์",
+    "examTip": "A-Level ใช้คำนวณปริมาตรแก๊สจากปฏิกิริยากรดกับโลหะ"
+  },
+  {
+    "symbol": "O",
+    "nameTh": "ออกซิเจน",
+    "atomicNumber": 8,
+    "atomicMass": 16,
+    "modes": ["basic20", "alevel"],
+    "tag": "O2 MW=32 / ออกไซด์ในสารละลาย",
+    "examTip": "A-Level คำนวณร้อยละโดยมวล ปริมาตรแก๊สที่ STP และกรด-เบส"
+  },
+  {
+    "symbol": "Na",
+    "nameTh": "โซเดียม",
+    "atomicNumber": 11,
+    "atomicMass": 23,
+    "modes": ["basic20", "alevel"],
+    "tag": "NaOH MW=40 / Na2CO3 MW=106",
+    "examTip": "A-Level ออกบ่อยมากในเรื่องการเตรียมสารละลายและความเข้มข้น"
+  },
+  {
+    "symbol": "Fe",
+    "nameTh": "เหล็ก",
+    "atomicNumber": 26,
+    "atomicMass": 56,
+    "modes": ["basic20_plus", "alevel"],
+    "tag": "Fe2O3 MW=160 / ถลุงแร่เหล็ก & รีดอกซ์",
+    "examTip": "A-Level ใช้คำนวณปริมาณสารอุตสาหกรรม และปฏิกิริยารีดอกซ์"
+  },
+  {
+    "symbol": "Zn",
+    "nameTh": "สังกะสี",
+    "atomicNumber": 30,
+    "atomicMass": 65.4,
+    "modes": ["basic20_plus", "alevel"],
+    "tag": "ขั้วแอโนดจ่าย e- / ปฏิกิริยากับ HCl",
+    "examTip": "A-Level ออกสอบคำนวณแก๊ส H2 จาก Zn + HCl และศักย์ไฟฟ้า"
+  }
+]

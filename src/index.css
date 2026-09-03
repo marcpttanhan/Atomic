@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap');
+@import "tailwindcss";
+
+@font-face { font-family: 'Anuphan'; src: url('/uploads/Anuphan-Thin.ttf') format('truetype'); font-weight: 100; font-display: swap; }
+@font-face { font-family: 'Anuphan'; src: url('/uploads/Anuphan-ExtraLight.ttf') format('truetype'); font-weight: 200; font-display: swap; }
+@font-face { font-family: 'Anuphan'; src: url('/uploads/Anuphan-Light.ttf') format('truetype'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Anuphan'; src: url('/uploads/Anuphan-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Anuphan'; src: url('/uploads/Anuphan-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Anuphan'; src: url('/uploads/Anuphan-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Anuphan'; src: url('/uploads/Anuphan-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
+
+@theme {
+  --font-heading: 'Archivo', 'Anuphan', sans-serif;
+  --font-body: 'Archivo', 'Anuphan', sans-serif;
+
+  --color-bg: #f3f2f2;
+  --color-surface: #ffffff;
+  --color-ink: #201e1d;
+  --color-muted: #7d7979;
+  --color-divider: #e4e0e0;
+
+  --color-accent: #ec3013;
+  --color-accent-100: #fff2ef;
+  --color-accent-200: #ffe0d9;
+  --color-accent-300: #ffc4b8;
+  --color-accent-400: #ff9783;
+  --color-accent-500: #ff563c;
+  --color-accent-600: #dd2b0f;
+  --color-accent-700: #ae1800;
+  --color-accent-800: #7c1405;
+  --color-accent-900: #4d170e;
+
+  --color-neutral-100: #f8f4f4;
+  --color-neutral-200: #eae7e7;
+  --color-neutral-300: #d7d3d3;
+  --color-neutral-400: #bab6b6;
+  --color-neutral-500: #9b9797;
+  --color-neutral-600: #7d7979;
+  --color-neutral-700: #605d5d;
+  --color-neutral-800: #444141;
+  --color-neutral-900: #2d2b2b;
+
+  --color-good: #2f8f5b;
+  --color-good-bg: #ebf7f1;
+
+  --color-amber: #b8790a;
+  --color-amber-bg: #fbf1de;
+
+  --color-cyan: #0e7490;
+  --color-cyan-bg: #ecfeff;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+/* Dark theme — same token names, different values. Every component already
+   consumes color exclusively through these CSS custom properties (via the
+   Tailwind utilities generated from @theme above), so overriding them here
+   for `.dark` (applied to <html>) re-themes the whole app with no changes
+   needed in component markup. The neutral and accent ramps are reversed
+   (light-mode 100..900 -> dark-mode 900..100) so subtle fills stay subtle
+   and readable text stays readable in both directions. */
+:root.dark {
+  --color-bg: #18181b;
+  --color-surface: #27272a;
+  --color-ink: #f4f4f5;
+  --color-muted: #a1a1aa;
+  --color-divider: #3f3f46;
+
+  --color-accent-100: #451a10;
+  --color-accent-200: #5c2013;
+  --color-accent-300: #7c1405;
+  --color-accent-400: #ae1800;
+  --color-accent-500: #dd2b0f;
+  --color-accent-600: #ff563c;
+  --color-accent-700: #ff9783;
+  --color-accent-800: #ffc4b8;
+  --color-accent-900: #ffe0d9;
+
+  --color-neutral-100: #3f3f46;
+  --color-neutral-200: #52525b;
+  --color-neutral-300: #71717a;
+  --color-neutral-400: #a1a1aa;
+  --color-neutral-500: #a1a1aa;
+  --color-neutral-600: #b4b4bb;
+  --color-neutral-700: #d4d4d8;
+  --color-neutral-800: #e4e4e7;
+  --color-neutral-900: #f4f4f5;
+
+  --color-good-bg: #12301f;
+  --color-amber: #e0a030;
+  --color-amber-bg: #3a2a0d;
+
+  --color-cyan: #22d3ee;
+  --color-cyan-bg: #083344;
+}
