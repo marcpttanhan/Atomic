@@ -14,7 +14,7 @@ if not exist "dist\index.html" (
 )
 
 echo Starting local server on http://localhost:3000 ...
-start "Atomic Recall - dist server" cmd /k npx serve dist -l 3000
+start "Atomic Revision - dist server" cmd /k npx serve dist -l 3000
 
 echo Waiting for the server to boot...
 ping -n 3 127.0.0.1 >nul

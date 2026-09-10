@@ -48,6 +48,11 @@
 
   --color-cyan: #0e7490;
   --color-cyan-bg: #ecfeff;
+
+  /* Modal backdrop scrim — deliberately NOT overridden in :root.dark below
+     (like --color-good/--color-accent above): a backdrop should always dim
+     toward black, never flip to a light haze the way inverted tokens do. */
+  --color-overlay: rgba(15, 13, 13, 0.55);
 }
 
 body {

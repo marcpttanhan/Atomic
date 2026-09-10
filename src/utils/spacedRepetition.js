@@ -113,6 +113,33 @@ export function getPriorityWeight(record) {
   return 1 + (100 - mastery) / 20;
 }
 
+// Aggregates raw accuracy (not the composite mastery score) across a
+// specific pool of elements — used for mode-scoped stats (e.g. "accuracy
+// for POSN Focus") where the ask is a plain %, not the SM-2 composite.
+export function getModeStats(pool, srsData) {
+  let totalCorrect = 0;
+  let totalAttempts = 0;
+  let attemptedCount = 0;
+  const mastered = [];
+  pool.forEach((el) => {
+    const record = srsData[el.z];
+    if (!record || record.attempts === 0) return;
+    attemptedCount += 1;
+    totalCorrect += record.correct;
+    totalAttempts += record.attempts;
+    const accuracy = record.correct / record.attempts;
+    if (accuracy >= 0.8) {
+      mastered.push({ z: el.z, sym: el.sym, th: el.th, accuracyPct: Math.round(accuracy * 100) });
+    }
+  });
+  return {
+    accuracyPct: totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : null,
+    attemptedCount,
+    totalCount: pool.length,
+    mastered: mastered.sort((a, b) => b.accuracyPct - a.accuracyPct),
+  };
+}
+
 export function pickWeightedElement(pool, srsData) {
   if (!pool.length) return null;
   const weights = pool.map((el) => getPriorityWeight(srsData[el.z]));

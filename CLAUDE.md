@@ -1,4 +1,4 @@
-# Atomic Recall — Project Guidelines
+# Atomic Revision — Project Guidelines
 
 This is a client-side-only React + Vite + Tailwind chemistry-quiz app (single-file build via
 `vite-plugin-singlefile`). For **any** code generation or refactoring in this repository, the

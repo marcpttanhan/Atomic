@@ -53,3 +53,6 @@ export const glowBadgeClass =
 
 export const glowBadgeCyanClass =
   'border border-cyan/40 shadow-[0_0_10px_color-mix(in_srgb,var(--color-cyan)_25%,transparent)]';
+
+export const glowBadgeGoodClass =
+  'border border-good/40 shadow-[0_0_10px_color-mix(in_srgb,var(--color-good)_25%,transparent)]';

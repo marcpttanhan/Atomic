@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { playClickSFX, playSubmitSFX } from '../utils/sfx.js';
 import { SunIcon, MoonIcon } from './icons.jsx';
 import AtomCanvas from './AtomCanvas.jsx';
+import GuideModal from './GuideModal.jsx';
 
 const containerVariants = {
   hidden: {},
@@ -16,6 +17,7 @@ const itemVariants = {
 
 export default function WelcomeScreen({ onSubmit, theme, onToggleTheme }) {
   const [name, setName] = useState('');
+  const [guideOpen, setGuideOpen] = useState(false);
   const canSubmit = name.trim().length > 0;
   const shouldReduceMotion = useReducedMotion();
 
@@ -82,10 +84,7 @@ export default function WelcomeScreen({ onSubmit, theme, onToggleTheme }) {
         className="relative z-10 w-full max-w-sm"
       >
         <motion.div variants={itemVariants} className="mb-8 text-center">
-          <span className="mb-2 inline-block rounded-full border border-cyan/20 bg-cyan-bg px-3 py-1 text-xs text-cyan">
-            ⚛️ POSN & A-Level Prep
-          </span>
-          <div className="font-heading text-3xl font-bold tracking-tight">ATOMIC RECALL</div>
+          <div className="font-heading text-3xl font-bold tracking-tight">ATOMIC REVISION</div>
           <div className="mt-2 text-sm text-neutral-600">ฝึกจำธาตุเคมี แข่งขัน และไต่แร้งค์ไปด้วยกัน</div>
         </motion.div>
 
@@ -120,8 +119,18 @@ export default function WelcomeScreen({ onSubmit, theme, onToggleTheme }) {
           <div className="mt-3 text-center text-xs text-neutral-500">
             กด Enter เพื่อเริ่มทันที ↵
           </div>
+
+          <button
+            type="button"
+            onClick={() => { playClickSFX(); setGuideOpen(true); }}
+            className="mt-4 w-full cursor-pointer text-center text-xs font-semibold text-neutral-600 underline decoration-divider decoration-1 underline-offset-2 transition-colors duration-150 hover:text-accent-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded"
+          >
+            วิธีการเล่น &amp; ประโยชน์ของการจำเลขอะตอม
+          </button>
         </motion.div>
       </motion.div>
+
+      <GuideModal open={guideOpen} onClose={() => setGuideOpen(false)} />
 
       <motion.div
         initial={{ opacity: 0 }}

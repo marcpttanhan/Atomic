@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ELEMENTS, getPool, getRank, getMnemonic, hintText, getExamInfo } from './data/elements.js';
+import { ELEMENTS, getPool, getRank, getMnemonic, hintText, getExamInfo, GAME_MODES } from './data/elements.js';
 import { getEloRank } from './utils/elo.js';
 import { safeGetItem, safeSetItem } from './utils/safeStorage.js';
 import { playClickSFX, playErrorSFX } from './utils/sfx.js';
-import { loadSRSData, pickWeightedElement, recordAnswer } from './utils/spacedRepetition.js';
+import { loadSRSData, pickWeightedElement, recordAnswer, getModeStats } from './utils/spacedRepetition.js';
 import Sidebar from './components/Sidebar.jsx';
 import PracticeCard from './components/PracticeCard.jsx';
 import StatsPanel from './components/StatsPanel.jsx';
+import ModeSwitcherBar from './components/ModeSwitcherBar.jsx';
+import ModeStatsDrawer from './components/ModeStatsDrawer.jsx';
+import GuideModal from './components/GuideModal.jsx';
 import AssessmentPanel from './components/AssessmentPanel.jsx';
 import TimeAttack from './components/TimeAttack.jsx';
 import MatchmakingPanel from './components/MatchmakingPanel.jsx';
@@ -19,7 +22,7 @@ import AudioPlayer, { AUDIO_STORAGE_KEY } from './components/AudioPlayer.jsx';
 import Toast from './components/Toast.jsx';
 import WelcomeScreen from './components/WelcomeScreen.jsx';
 import AmbientGlow from './components/AmbientGlow.jsx';
-import { FlameIcon, SunIcon, MoonIcon } from './components/icons.jsx';
+import { FlameIcon, SunIcon, MoonIcon, HelpIcon } from './components/icons.jsx';
 import { springHover } from './utils/styles.js';
 
 const STORAGE_KEY = 'atomicRecallV1';
@@ -135,6 +138,8 @@ export default function App() {
     safeSetItem(STORAGE_KEY, JSON.stringify(buildProgressPayload(state)));
   }, [state.missed, state.stats, state.preset, state.points, state.streak, state.sound, state.assessments, state.timeAttack.high, state.playerElo, state.matchHistory, state.focusMode]);
 
+  const [guideOpen, setGuideOpen] = useState(false);
+
   const [toast, setToast] = useState(null);
   const toastTimerRef = useRef(null);
   const showToast = useCallback((message, tone = 'success') => {
@@ -234,7 +239,7 @@ export default function App() {
     const accuracyPct = s.stats.asked ? Math.round((s.stats.correct / s.stats.asked) * 100) + '%' : '—';
     const avgSec = s.stats.asked ? (s.stats.totalMs / s.stats.asked / 1000).toFixed(1) + ' วิ' : '—';
     const lines = [
-      'รายงานความคืบหน้า Atomic Recall',
+      'รายงานความคืบหน้า Atomic Revision',
       'วันที่: ' + new Date().toLocaleString('th-TH'),
       '',
       'สรุปการฝึกฝน',
@@ -466,6 +471,18 @@ export default function App() {
   const topMissed = missedEntries.slice(0, 5);
   const missedList = missedEntries.map((m) => ({ ...m, streakLabel: `${m.streak}/2` }));
 
+  // Mode-scoped analytics for the ModeSwitcherBar/ModeStatsDrawer — derived
+  // fresh every render (so it reflects the latest answer immediately) from
+  // the same SRS store and `missed` map everything else already uses;
+  // no separate per-mode tracking is introduced.
+  const activeGameMode = GAME_MODES.find((m) => m.id === state.preset) || GAME_MODES[0];
+  const modePool = getPool(ELEMENTS, state.preset, 'practice', {});
+  const modeStats = getModeStats(modePool, loadSRSData());
+  const modeNeedReview = modePool
+    .filter((e) => state.missed[e.z] && state.missed[e.z].count > 0)
+    .map((e) => ({ z: e.z, sym: e.sym, th: e.th, count: state.missed[e.z].count }))
+    .sort((a, b) => b.count - a.count);
+
   const hint = state.current ? hintText(state.current) : '';
   const mnemonic = state.current ? getMnemonic(state.current) : '';
   const examInfo = state.current ? getExamInfo(state.current) : null;
@@ -525,6 +542,7 @@ export default function App() {
   return (
     <div className="flex min-h-screen flex-col bg-bg text-ink">
       <Toast toast={toast} onDismiss={() => setToast(null)} />
+      <GuideModal open={guideOpen} onClose={() => setGuideOpen(false)} />
       <motion.header
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -532,7 +550,7 @@ export default function App() {
         className="sticky top-0 z-20 flex items-center justify-between border-b border-divider bg-surface/80 px-7 py-4 backdrop-blur-md"
       >
         <div className="flex items-center gap-3">
-          <span className="font-heading text-xl font-bold tracking-wide">ATOMIC RECALL</span>
+          <span className="font-heading text-xl font-bold tracking-wide">ATOMIC REVISION</span>
           <span className="rounded-full border border-divider bg-surface px-3 py-1 text-[13px] font-semibold text-ink shadow-sm">
             {playerName}
           </span>
@@ -561,6 +579,18 @@ export default function App() {
             <span>{state.playerElo} Elo</span>
           </div>
           <AudioPlayer focusMode={state.focusMode} onToggleFocusMode={toggleFocusMode} />
+          <motion.button
+            type="button"
+            onClick={() => { playClickSFX(); setGuideOpen(true); }}
+            aria-label="วิธีการเล่นและประโยชน์"
+            title="วิธีการเล่น & ประโยชน์ของการจำเลขอะตอม"
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.94 }}
+            transition={springHover}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-divider bg-surface text-ink shadow-sm transition-colors duration-150 hover:bg-neutral-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+          >
+            <HelpIcon />
+          </motion.button>
           <motion.button
             type="button"
             onClick={() => { playClickSFX(); toggleTheme(); }}
@@ -593,39 +623,50 @@ export default function App() {
 
         <main className="relative z-10 flex min-h-0 min-w-0 flex-1">
           {isCardMode && (
-            <>
-              <PracticeCard
-                mode={state.mode}
-                current={state.current}
-                input={state.input}
-                feedback={state.feedback}
-                hintOpen={state.hintOpen}
-                hint={hint}
-                mnemonic={mnemonic}
-                examInfo={examInfo}
-                canSubmit={canSubmit}
-                showEmpty={state.mode === 'recall' && !state.current}
-                onDigit={appendDigit}
-                onBackspace={backspace}
-                onToggleHint={toggleHint}
-                onSubmit={submit}
-                onBackToPractice={() => setMode('practice')}
+            <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+              <ModeSwitcherBar preset={state.preset} onSelectPreset={setPreset} />
+              <ModeStatsDrawer
+                modeLabel={activeGameMode.label}
+                accuracyPct={modeStats.accuracyPct}
+                attemptedCount={modeStats.attemptedCount}
+                totalCount={modeStats.totalCount}
+                mastered={modeStats.mastered}
+                needReview={modeNeedReview}
               />
-              <StatsPanel
-                accuracyPct={accuracyPct}
-                avgSec={avgSec}
-                rank={rank}
-                rankProgressPct={rankInfo.progressPct}
-                rankPointsLabel={rankPointsLabel}
-                weekDots={weekDots}
-                streakMultiplierActive={streakMultiplierActive}
-                topMissed={topMissed}
-                ctaLabel={ctaLabel}
-                onCta={ctaAction}
-                ctaDisabled={ctaDisabled}
-                ctaPrimary={ctaPrimary}
-              />
-            </>
+              <div className="flex min-h-0 flex-1 overflow-hidden">
+                <PracticeCard
+                  mode={state.mode}
+                  current={state.current}
+                  input={state.input}
+                  feedback={state.feedback}
+                  hintOpen={state.hintOpen}
+                  hint={hint}
+                  mnemonic={mnemonic}
+                  examInfo={examInfo}
+                  canSubmit={canSubmit}
+                  showEmpty={state.mode === 'recall' && !state.current}
+                  onDigit={appendDigit}
+                  onBackspace={backspace}
+                  onToggleHint={toggleHint}
+                  onSubmit={submit}
+                  onBackToPractice={() => setMode('practice')}
+                />
+                <StatsPanel
+                  accuracyPct={accuracyPct}
+                  avgSec={avgSec}
+                  rank={rank}
+                  rankProgressPct={rankInfo.progressPct}
+                  rankPointsLabel={rankPointsLabel}
+                  weekDots={weekDots}
+                  streakMultiplierActive={streakMultiplierActive}
+                  topMissed={topMissed}
+                  ctaLabel={ctaLabel}
+                  onCta={ctaAction}
+                  ctaDisabled={ctaDisabled}
+                  ctaPrimary={ctaPrimary}
+                />
+              </div>
+            </div>
           )}
 
           {state.mode === 'assessment' && (
