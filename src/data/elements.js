@@ -113,8 +113,8 @@ export function getRank(points) {
 }
 
 export const GAME_MODES = [
-  { id: "basic20", emoji: "🟢", label: "Basic 20 Elements", desc: "ธาตุพื้นฐาน 20 ตัวแรก", badge: "ม.4 ต้นเทอม" },
-  { id: "posn", emoji: "🔵", label: "POSN Chemistry Focus", desc: "ธาตุคัดเน้นสำหรับเตรียมสอบ สอวน. ค่าย 1", badge: "ม.4-ม.5 / สอวน." },
-  { id: "alevel", emoji: "🔴", label: "A-Level Exam Core", desc: "ธาตุและมวลอะตอมที่ออกคำนวณบ่อยใน A-Level", badge: "ม.6 / A-Level" },
-  { id: "ranked", emoji: "🟣", label: "Ranked / All-Star Mix", desc: "สุ่มสลับธาตุทุกประเภทเพื่อไต่ Rank (Elo)", badge: "ไต่แรงก์" },
+  { id: "basic20", emoji: "🟢", icon: "sparkles", theme: "good", label: "Basic 20 Elements", desc: "ธาตุพื้นฐาน 20 ตัวแรก", badge: "ม.4 ต้นเทอม" },
+  { id: "posn", emoji: "🔵", icon: "flaskConical", theme: "cyan", label: "POSN Chemistry Focus", desc: "ธาตุคัดเน้นสำหรับเตรียมสอบ สอวน. ค่าย 1", badge: "ม.4-ม.5 / สอวน." },
+  { id: "alevel", emoji: "🔴", icon: "target", theme: "accent", label: "A-Level Exam Core", desc: "ธาตุและมวลอะตอมที่ออกคำนวณบ่อยใน A-Level", badge: "ม.6 / A-Level" },
+  { id: "ranked", emoji: "🟣", icon: "trophy", theme: "purple", label: "Ranked / All-Star Mix", desc: "สุ่มสลับธาตุทุกประเภทเพื่อไต่ Rank (Elo)", badge: "ไต่แรงก์" },
 ];

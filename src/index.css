@@ -49,6 +49,9 @@
   --color-cyan: #0e7490;
   --color-cyan-bg: #ecfeff;
 
+  --color-purple: #7c3aed;
+  --color-purple-bg: #f5f3ff;
+
   /* Modal backdrop scrim — deliberately NOT overridden in :root.dark below
      (like --color-good/--color-accent above): a backdrop should always dim
      toward black, never flip to a light haze the way inverted tokens do. */
@@ -102,4 +105,7 @@ body {
 
   --color-cyan: #22d3ee;
   --color-cyan-bg: #083344;
+
+  --color-purple: #a78bfa;
+  --color-purple-bg: #2e1065;
 }

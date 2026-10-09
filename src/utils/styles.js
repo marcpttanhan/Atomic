@@ -56,3 +56,41 @@ export const glowBadgeCyanClass =
 
 export const glowBadgeGoodClass =
   'border border-good/40 shadow-[0_0_10px_color-mix(in_srgb,var(--color-good)_25%,transparent)]';
+
+export const glowBadgePurpleClass =
+  'border border-purple/40 shadow-[0_0_10px_color-mix(in_srgb,var(--color-purple)_25%,transparent)]';
+
+// Per-mode theming for GameModeSelector's cards — one entry per `theme` key
+// on a GAME_MODES item (elements.js). Built entirely from existing/added
+// @theme tokens (good/cyan/accent/purple), never literal hex/Tailwind-palette
+// colors, so each mode's accent re-themes automatically in light/dark.
+export const GAME_MODE_THEMES = {
+  good: {
+    iconBadge: 'border-good/20 bg-good-bg text-good',
+    pillBadge: `border-good/40 bg-good-bg text-good ${glowBadgeGoodClass}`,
+    activeCard: 'border-good bg-good-bg/60',
+    activeGlow: 'shadow-[0_0_24px_color-mix(in_srgb,var(--color-good)_25%,transparent)]',
+    activeCheck: 'bg-good',
+  },
+  cyan: {
+    iconBadge: 'border-cyan/20 bg-cyan-bg text-cyan',
+    pillBadge: `border-cyan/40 bg-cyan-bg text-cyan ${glowBadgeCyanClass}`,
+    activeCard: 'border-cyan bg-cyan-bg/60',
+    activeGlow: 'shadow-[0_0_24px_color-mix(in_srgb,var(--color-cyan)_25%,transparent)]',
+    activeCheck: 'bg-cyan',
+  },
+  accent: {
+    iconBadge: 'border-accent-300/50 bg-accent-100 text-accent-700',
+    pillBadge: `bg-accent-100 text-accent-800 ${glowBadgeClass}`,
+    activeCard: 'border-accent-700 bg-accent-100/60',
+    activeGlow: 'shadow-[0_0_24px_color-mix(in_srgb,var(--color-accent)_25%,transparent)]',
+    activeCheck: 'bg-accent',
+  },
+  purple: {
+    iconBadge: 'border-purple/20 bg-purple-bg text-purple',
+    pillBadge: `border-purple/40 bg-purple-bg text-purple ${glowBadgePurpleClass}`,
+    activeCard: 'border-purple bg-purple-bg/60',
+    activeGlow: 'shadow-[0_0_24px_color-mix(in_srgb,var(--color-purple)_25%,transparent)]',
+    activeCheck: 'bg-purple',
+  },
+};
